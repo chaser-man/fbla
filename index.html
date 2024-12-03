@@ -23,6 +23,9 @@
             background-color: #1a5f7a;
             color: #fff;
             padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         header h1 {
@@ -42,6 +45,11 @@
         nav ul li a {
             color: #fff;
             text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #f0f0f0;
         }
 
         /* Main content styles */
@@ -55,13 +63,25 @@
 
         h2 {
             margin-bottom: 1rem;
+            color: #1a5f7a;
         }
 
         /* Hero section */
         #hero {
             background-color: #f4f4f4;
-            padding: 2rem;
+            padding: 4rem 2rem;
             text-align: center;
+            background-image: url('https://source.unsplash.com/1600x900/?stadium');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        #hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
         }
 
         /* Calendar styles */
@@ -109,6 +129,8 @@
             width: 100%;
             padding: 0.5rem;
             margin-top: 0.25rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
         button {
@@ -118,10 +140,67 @@
             padding: 0.5rem 1rem;
             margin-top: 1rem;
             cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
             background-color: #14475a;
+        }
+
+        /* Map styles */
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        /* Gallery styles */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Testimonial styles */
+        .testimonial {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .testimonial p {
+            font-style: italic;
+        }
+
+        .testimonial cite {
+            display: block;
+            text-align: right;
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #1a5f7a;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
         }
 
         /* Responsive design */
@@ -132,6 +211,14 @@
 
             nav ul li {
                 margin-bottom: 0.5rem;
+            }
+
+            #hero {
+                padding: 2rem 1rem;
+            }
+
+            #hero h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -145,6 +232,7 @@
                 <li><a href="#events">Events</a></li>
                 <li><a href="#tickets">Tickets</a></li>
                 <li><a href="#info">Information</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#planner">Event Planner</a></li>
             </ul>
         </nav>
@@ -160,6 +248,18 @@
             <section id="highlights">
                 <h2>Upcoming Highlights</h2>
                 <div id="highlight-container"></div>
+            </section>
+
+            <section id="testimonials">
+                <h2>What People Say</h2>
+                <div class="testimonial">
+                    <p>"The School Arena is an amazing venue for our annual trade show. The staff is incredibly helpful and the facilities are top-notch!"</p>
+                    <cite>- John Doe, Event Organizer</cite>
+                </div>
+                <div class="testimonial">
+                    <p>"I've attended several concerts here, and the acoustics are fantastic. It's become my favorite local venue!"</p>
+                    <cite>- Jane Smith, Music Enthusiast</cite>
+                </div>
             </section>
         </section>
 
@@ -184,16 +284,13 @@
             
             <section id="directions">
                 <h3>Directions</h3>
-                <p>Our arena is located at 123 Main Street, Anytown, USA. For detailed directions, please use the map below:</p>
-                <div id="map">
-                    <!-- Add a map here using Google Maps or another map service -->
-                    [Map Placeholder]
-                </div>
+                <p>Our arena is located at 123 Main Street, Anytown, USA. Use the map below for directions:</p>
+                <div id="map"></div>
             </section>
 
             <section id="seating-chart">
                 <h3>Seating Chart</h3>
-                <img src="/placeholder.svg?height=400&width=600" alt="Arena Seating Chart">
+                <img src="https://source.unsplash.com/800x600/?seating-chart" alt="Arena Seating Chart" style="max-width: 100%; height: auto;">
             </section>
 
             <section id="policies">
@@ -216,6 +313,16 @@
                     <li>Wheelchair accessible seating</li>
                 </ul>
             </section>
+        </section>
+
+        <section id="gallery">
+            <h2>Arena Gallery</h2>
+            <div class="gallery">
+                <img src="https://source.unsplash.com/400x300/?concert" alt="Concert at the arena">
+                <img src="https://source.unsplash.com/400x300/?basketball" alt="Basketball game at the arena">
+                <img src="https://source.unsplash.com/400x300/?trade-show" alt="Trade show at the arena">
+                <img src="https://source.unsplash.com/400x300/?graduation" alt="Graduation ceremony at the arena">
+            </div>
         </section>
 
         <section id="planner">
@@ -352,6 +459,27 @@
                     this.reset();
                 });
             }
+
+            // Initialize Google Maps
+            function initMap() {
+                const schoolArena = { lat: 40.7128, lng: -74.0060 }; // Replace with actual coordinates
+                const map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: schoolArena,
+                });
+                const marker = new google.maps.Marker({
+                    position: schoolArena,
+                    map: map,
+                    title: 'School Arena'
+                });
+            }
+
+            // Load Google Maps API
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap`;
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
         });
     </script>
 </body>
