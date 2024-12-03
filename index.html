@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Arena</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #1a5f7a;
+            color: #fff;
+            padding: 1rem;
+        }
+
+        header h1 {
+            margin-bottom: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin-right: 1rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Main content styles */
+        main {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        /* Hero section */
+        #hero {
+            background-color: #f4f4f4;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Calendar styles */
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .calendar-header, .calendar-day {
+            background-color: #f0f0f0;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .calendar-header {
+            font-weight: bold;
+            background-color: #1a5f7a;
+            color: #fff;
+        }
+
+        .calendar-day {
+            min-height: 80px;
+        }
+
+        .calendar-day.has-event {
+            background-color: #c5e1a5;
+            cursor: pointer;
+        }
+
+        /* Form styles */
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 1rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.25rem;
+        }
+
+        button {
+            background-color: #1a5f7a;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #14475a;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>School Arena</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#tickets">Tickets</a></li>
+                <li><a href="#info">Information</a></li>
+                <li><a href="#planner">Event Planner</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <div id="hero">
+                <h2>Welcome to Our Multi-Purpose Arena</h2>
+                <p>Home to local sporting events, live concerts, trade shows, and more!</p>
+            </div>
+
+            <section id="highlights">
+                <h2>Upcoming Highlights</h2>
+                <div id="highlight-container"></div>
+            </section>
+        </section>
+
+        <section id="events">
+            <h2>Upcoming Events</h2>
+            <div id="calendar" class="calendar"></div>
+        </section>
+
+        <section id="tickets">
+            <h2>Purchase Tickets</h2>
+            <p>To purchase tickets, please visit our box office or use one of our authorized ticket vendors:</p>
+            <ul>
+                <li><a href="#">TicketMaster</a></li>
+                <li><a href="#">EventBrite</a></li>
+                <li><a href="#">Local Box Office</a></li>
+            </ul>
+            <p>For group sales or special accommodations, please contact our ticket office at (555) 123-4567.</p>
+        </section>
+
+        <section id="info">
+            <h2>Arena Information</h2>
+            
+            <section id="directions">
+                <h3>Directions</h3>
+                <p>Our arena is located at 123 Main Street, Anytown, USA. For detailed directions, please use the map below:</p>
+                <div id="map">
+                    <!-- Add a map here using Google Maps or another map service -->
+                    [Map Placeholder]
+                </div>
+            </section>
+
+            <section id="seating-chart">
+                <h3>Seating Chart</h3>
+                <img src="/placeholder.svg?height=400&width=600" alt="Arena Seating Chart">
+            </section>
+
+            <section id="policies">
+                <h3>Policies</h3>
+                <ul>
+                    <li>No outside food or drinks allowed</li>
+                    <li>No smoking inside the arena</li>
+                    <li>All bags are subject to search</li>
+                    <li>No weapons of any kind are permitted</li>
+                </ul>
+            </section>
+
+            <section id="amenities">
+                <h3>Amenities</h3>
+                <ul>
+                    <li>Concession stands</li>
+                    <li>Restrooms on all levels</li>
+                    <li>First aid station</li>
+                    <li>ATM machines</li>
+                    <li>Wheelchair accessible seating</li>
+                </ul>
+            </section>
+        </section>
+
+        <section id="planner">
+            <h2>Event Planner</h2>
+            
+            <section id="rental-info">
+                <h3>Arena Rental Information</h3>
+                <p>Our arena is available for rent for various events, including:</p>
+                <ul>
+                    <li>Sporting events</li>
+                    <li>Concerts</li>
+                    <li>Trade shows</li>
+                    <li>Community gatherings</li>
+                    <li>Corporate events</li>
+                </ul>
+                <p>Rental rates vary depending on the type of event, duration, and required services. Please contact our event planning team for a customized quote.</p>
+            </section>
+
+            <section id="contacts">
+                <h3>Contact Information</h3>
+                <p>To inquire about renting the arena or for any other event planning questions, please contact:</p>
+                <ul>
+                    <li>Event Planning Office: (555) 987-6543</li>
+                    <li>Email: events@schoolarena.com</li>
+                </ul>
+            </section>
+
+            <section id="request-form">
+                <h3>Request Information</h3>
+                <form id="event-request-form">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone">
+
+                    <label for="event-type">Event Type:</label>
+                    <select id="event-type" name="event-type">
+                        <option value="">Select an event type</option>
+                        <option value="sports">Sporting Event</option>
+                        <option value="concert">Concert</option>
+                        <option value="trade-show">Trade Show</option>
+                        <option value="community">Community Event</option>
+                        <option value="corporate">Corporate Event</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label for="message">Additional Information:</label>
+                    <textarea id="message" name="message"></textarea>
+
+                    <button type="submit">Submit Request</button>
+                </form>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 School Arena. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sample event data (replace with actual data in a real application)
+            const events = [
+                { date: '2024-03-15', title: 'Local Basketball Tournament' },
+                { date: '2024-03-22', title: 'Spring Concert' },
+                { date: '2024-04-05', title: 'Trade Show' },
+                { date: '2024-04-20', title: 'Community Fair' }
+            ];
+
+            // Populate highlights on the home page
+            const highlightContainer = document.getElementById('highlight-container');
+            if (highlightContainer) {
+                events.forEach(event => {
+                    const eventElement = document.createElement('div');
+                    eventElement.innerHTML = `<h3>${event.title}</h3><p>${event.date}</p>`;
+                    highlightContainer.appendChild(eventElement);
+                });
+            }
+
+            // Calendar functionality
+            const calendarContainer = document.getElementById('calendar');
+            if (calendarContainer) {
+                const currentDate = new Date();
+                const currentMonth = currentDate.getMonth();
+                const currentYear = currentDate.getFullYear();
+
+                const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+                const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+
+                const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+                // Create calendar header
+                dayNames.forEach(day => {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'calendar-header';
+                    dayElement.textContent = day;
+                    calendarContainer.appendChild(dayElement);
+                });
+
+                // Create calendar days
+                for (let i = 0; i < firstDayOfMonth; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.className = 'calendar-day';
+                    calendarContainer.appendChild(emptyDay);
+                }
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'calendar-day';
+                    dayElement.textContent = day;
+
+                    const currentDate = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                    const eventForDay = events.find(event => event.date === currentDate);
+
+                    if (eventForDay) {
+                        dayElement.classList.add('has-event');
+                        dayElement.setAttribute('title', eventForDay.title);
+                    }
+
+                    calendarContainer.appendChild(dayElement);
+                }
+            }
+
+            // Event request form submission
+            const eventRequestForm = document.getElementById('event-request-form');
+            if (eventRequestForm) {
+                eventRequestForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your request. We will contact you shortly.');
+                    this.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
