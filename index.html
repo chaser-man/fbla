@@ -1,233 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>School Arena</title>
-    <style>
-        /* Reset and base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        /* Header styles */
-        header {
-            background-color: #1a5f7a;
-            color: #fff;
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        header h1 {
-            margin-bottom: 1rem;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        nav ul li {
-            margin-right: 1rem;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: #f0f0f0;
-        }
-
-        /* Main content styles */
-        main {
-            padding: 2rem;
-        }
-
-        section {
-            margin-bottom: 2rem;
-        }
-
-        h2 {
-            margin-bottom: 1rem;
-            color: #1a5f7a;
-        }
-
-        /* Hero section */
-        #hero {
-            background-color: #f4f4f4;
-            padding: 4rem 2rem;
-            text-align: center;
-            background-image: url('https://picsum.photos/1600/900');
-            background-size: cover;
-            background-position: center;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        #hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #fff;
-        }
-
-        /* Calendar styles */
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .calendar-header, .calendar-day {
-            background-color: #f0f0f0;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .calendar-header {
-            font-weight: bold;
-            background-color: #1a5f7a;
-            color: #fff;
-        }
-
-        .calendar-day {
-            min-height: 80px;
-        }
-
-        .calendar-day.has-event {
-            background-color: #c5e1a5;
-            cursor: pointer;
-        }
-
-        /* Form styles */
-        form {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        label {
-            display: block;
-            margin-top: 1rem;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 0.5rem;
-            margin-top: 0.25rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        button {
-            background-color: #1a5f7a;
-            color: #fff;
-            border: none;
-            padding: 0.5rem 1rem;
-            margin-top: 1rem;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #14475a;
-        }
-
-        /* Map styles */
-        #map {
-            height: 400px;
-            width: 100%;
-            margin-top: 1rem;
-        }
-
-        /* Gallery styles */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .gallery img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 4px;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Testimonial styles */
-        .testimonial {
-            background-color: #f4f4f4;
-            padding: 1rem;
-            border-radius: 4px;
-            margin-top: 1rem;
-        }
-
-        .testimonial p {
-            font-style: italic;
-        }
-
-        .testimonial cite {
-            display: block;
-            text-align: right;
-            margin-top: 0.5rem;
-            font-weight: bold;
-        }
-
-        /* Footer styles */
-        footer {
-            background-color: #1a5f7a;
-            color: #fff;
-            text-align: center;
-            padding: 1rem;
-            margin-top: 2rem;
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-            }
-
-            nav ul li {
-                margin-bottom: 0.5rem;
-            }
-
-            #hero {
-                padding: 2rem 1rem;
-            }
-
-            #hero h2 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <meta name="description"
+        content="Welcome to the School Arena - home to local sporting events, live concerts, trade shows, and more!">
+    <meta name="keywords" content="School Arena, Events, Tickets, Concerts, Sports, Trade Shows">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="scripts.js"></script>
 </head>
+
 <body>
     <header>
         <h1>School Arena</h1>
         <nav>
-            <ul>
+            <button class="nav-toggle" aria-label="Open navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#events">Events</a></li>
                 <li><a href="#tickets">Tickets</a></li>
@@ -239,35 +31,65 @@
     </header>
 
     <main>
+        <!-- Home Section -->
         <section id="home">
-            <div id="hero">
+            <div id="hero" role="banner" aria-label="Welcome to Our Multi-Purpose Arena">
                 <h2>Welcome to Our Multi-Purpose Arena</h2>
                 <p>Home to local sporting events, live concerts, trade shows, and more!</p>
             </div>
 
+            <!-- Highlights -->
             <section id="highlights">
                 <h2>Upcoming Highlights</h2>
                 <div id="highlight-container"></div>
             </section>
 
+            <!-- Testimonials -->
             <section id="testimonials">
                 <h2>What People Say</h2>
-                <div class="testimonial">
-                    <p>"The School Arena is an amazing venue for our annual trade show. The staff is incredibly helpful and the facilities are top-notch!"</p>
-                    <cite>- John Doe, Event Organizer</cite>
-                </div>
-                <div class="testimonial">
-                    <p>"I've attended several concerts here, and the acoustics are fantastic. It's become my favorite local venue!"</p>
-                    <cite>- Jane Smith, Music Enthusiast</cite>
-                </div>
+                <article class="testimonial">
+                    <p>"We've hosted our Tech Innovation Expo at School Arena for 3 years running. The flexible floor plan accommodates our 200+ vendors perfectly, and the in-house AV team makes setup a breeze. The dedicated event coordinator, Sarah, goes above and beyond every time."</p>
+                    <cite>- Michael Chen, Director of TechNW Exhibitions</cite>
+                </article>
+                <article class="testimonial">
+                    <p>"As a touring sound engineer for 15+ years, I was impressed by the arena's acoustic treatment and modern sound system. We sold out all 5,000 seats for our symphony performance, and the sound quality was exceptional even in the upper sections."</p>
+                    <cite>- Emma Rodriguez, Technical Director, Pacific Symphony</cite>
+                </article>
+                <article class="testimonial">
+                    <p>"The accessible seating options and friendly staff made our state basketball championships a great experience for all attendees. The new LED scoreboards and instant replay screens added a professional touch our athletes loved."</p>
+                    <cite>- Coach James Wilson, State Athletics Association</cite>
+                </article>
             </section>
         </section>
 
+        <!-- Events Section -->
         <section id="events">
             <h2>Upcoming Events</h2>
-            <div id="calendar" class="calendar"></div>
+            
+            <!-- Modern Filter Bar -->
+            <div class="event-dashboard">
+                <div class="filter-section">
+                    <div class="search-bar">
+                        <input type="text" id="eventSearch" placeholder="Search events...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-chips">
+                        <span class="chip active" data-filter="all">All</span>
+                        <span class="chip" data-filter="sports">Sports</span>
+                        <span class="chip" data-filter="concert">Concerts</span>
+                        <span class="chip" data-filter="trade-show">Trade Shows</span>
+                        <span class="chip" data-filter="community">Community</span>
+                    </div>
+                </div>
+                
+                <!-- Events Grid -->
+                <div class="events-grid" id="eventsList">
+                    <!-- Event cards will be dynamically populated here -->
+                </div>
+            </div>
         </section>
 
+        <!-- Tickets Section -->
         <section id="tickets">
             <h2>Purchase Tickets</h2>
             <p>To purchase tickets, please visit our box office or use one of our authorized ticket vendors:</p>
@@ -276,23 +98,37 @@
                 <li><a href="#">EventBrite</a></li>
                 <li><a href="#">Local Box Office</a></li>
             </ul>
-            <p>For group sales or special accommodations, please contact our ticket office at (555) 123-4567.</p>
+            <p>For group sales or special accommodations, please contact our ticket office at <a
+                    href="tel:+15551234567">(555) 123-4567</a>.</p>
         </section>
 
+        <!-- Information Section -->
         <section id="info">
             <h2>Arena Information</h2>
-            
+
+            <!-- Directions -->
             <section id="directions">
                 <h3>Directions</h3>
                 <p>Our arena is located at 123 Main Street, Anytown, USA. Use the map below for directions:</p>
-                <div id="map"></div>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d910.5996113645137!2d-113.50861848581441!3d37.06983604137642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sus!4v1733249902145!5m2!1sen!2sus" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </section>
 
+            <!-- Seating Chart -->
             <section id="seating-chart">
                 <h3>Seating Chart</h3>
-                <img src="https://picsum.photos/800/600" alt="Arena Seating Chart" style="max-width: 100%; height: auto;">
+                <img src="https://picsum.photos/800/600" alt="Arena Seating Chart"
+                    style="max-width: 100%; height: auto;">
             </section>
 
+            <!-- Policies -->
             <section id="policies">
                 <h3>Policies</h3>
                 <ul>
@@ -303,6 +139,7 @@
                 </ul>
             </section>
 
+            <!-- Amenities -->
             <section id="amenities">
                 <h3>Amenities</h3>
                 <ul>
@@ -315,6 +152,7 @@
             </section>
         </section>
 
+        <!-- Gallery Section -->
         <section id="gallery">
             <h2>Arena Gallery</h2>
             <div class="gallery">
@@ -325,9 +163,11 @@
             </div>
         </section>
 
+        <!-- Event Planner Section -->
         <section id="planner">
             <h2>Event Planner</h2>
-            
+
+            <!-- Rental Info -->
             <section id="rental-info">
                 <h3>Arena Rental Information</h3>
                 <p>Our arena is available for rent for various events, including:</p>
@@ -338,18 +178,21 @@
                     <li>Community gatherings</li>
                     <li>Corporate events</li>
                 </ul>
-                <p>Rental rates vary depending on the type of event, duration, and required services. Please contact our event planning team for a customized quote.</p>
+                <p>Rental rates vary depending on the type of event, duration, and required services. Please contact our
+                    event planning team for a customized quote.</p>
             </section>
 
+            <!-- Contacts -->
             <section id="contacts">
                 <h3>Contact Information</h3>
                 <p>To inquire about renting the arena or for any other event planning questions, please contact:</p>
                 <ul>
-                    <li>Event Planning Office: (555) 987-6543</li>
-                    <li>Email: events@schoolarena.com</li>
+                    <li>Event Planning Office: <a href="tel:+15559876543">(555) 987-6543</a></li>
+                    <li>Email: <a href="mailto:events@schoolarena.com">events@schoolarena.com</a></li>
                 </ul>
             </section>
 
+            <!-- Request Form -->
             <section id="request-form">
                 <h3>Request Information</h3>
                 <form id="event-request-form">
@@ -363,7 +206,7 @@
                     <input type="tel" id="phone" name="phone">
 
                     <label for="event-type">Event Type:</label>
-                    <select id="event-type" name="event-type">
+                    <select id="event-type" name="event-type" required>
                         <option value="">Select an event type</option>
                         <option value="sports">Sporting Event</option>
                         <option value="concert">Concert</option>
@@ -385,102 +228,6 @@
     <footer>
         <p>&copy; 2024 School Arena. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Sample event data (replace with actual data in a real application)
-            const events = [
-                { date: '2024-03-15', title: 'Local Basketball Tournament' },
-                { date: '2024-03-22', title: 'Spring Concert' },
-                { date: '2024-04-05', title: 'Trade Show' },
-                { date: '2024-04-20', title: 'Community Fair' }
-            ];
-
-            // Populate highlights on the home page
-            const highlightContainer = document.getElementById('highlight-container');
-            if (highlightContainer) {
-                events.forEach(event => {
-                    const eventElement = document.createElement('div');
-                    eventElement.innerHTML = `<h3>${event.title}</h3><p>${event.date}</p>`;
-                    highlightContainer.appendChild(eventElement);
-                });
-            }
-
-            // Calendar functionality
-            const calendarContainer = document.getElementById('calendar');
-            if (calendarContainer) {
-                const currentDate = new Date();
-                const currentMonth = currentDate.getMonth();
-                const currentYear = currentDate.getFullYear();
-
-                const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-                const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-
-                const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-                // Create calendar header
-                dayNames.forEach(day => {
-                    const dayElement = document.createElement('div');
-                    dayElement.className = 'calendar-header';
-                    dayElement.textContent = day;
-                    calendarContainer.appendChild(dayElement);
-                });
-
-                // Create calendar days
-                for (let i = 0; i < firstDayOfMonth; i++) {
-                    const emptyDay = document.createElement('div');
-                    emptyDay.className = 'calendar-day';
-                    calendarContainer.appendChild(emptyDay);
-                }
-
-                for (let day = 1; day <= daysInMonth; day++) {
-                    const dayElement = document.createElement('div');
-                    dayElement.className = 'calendar-day';
-                    dayElement.textContent = day;
-
-                    const currentDate = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-                    const eventForDay = events.find(event => event.date === currentDate);
-
-                    if (eventForDay) {
-                        dayElement.classList.add('has-event');
-                        dayElement.setAttribute('title', eventForDay.title);
-                    }
-
-                    calendarContainer.appendChild(dayElement);
-                }
-            }
-
-            // Event request form submission
-            const eventRequestForm = document.getElementById('event-request-form');
-            if (eventRequestForm) {
-                eventRequestForm.addEventListener('eventRequestForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Thank you for your request. We will contact you shortly.');
-                    this.reset();
-                });
-            }
-
-            // Initialize Google Maps
-            function initMap() {
-                const schoolArena = { lat: 40.7128, lng: -74.0060 }; // Replace with actual coordinates
-                const map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 14,
-                    center: schoolArena,
-                });
-                const marker = new google.maps.Marker({
-                    position: schoolArena,
-                    map: map,
-                    title: 'School Arena'
-                });
-            }
-
-            // Load Google Maps API
-            const script = document.createElement('script');
-            script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap`;
-            script.async = true;
-            script.defer = true;
-            document.head.appendChild(script);
-        });
-    </script>
 </body>
+
 </html>
