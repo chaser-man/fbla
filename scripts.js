@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const events = [
+    // Retrieve user-added events from localStorage
+    const userEvents = JSON.parse(localStorage.getItem('userEvents')) || [];
+
+    // Predefined events
+    const predefinedEvents = [
         {
             id: 1,
             date: '2024-12-15',
@@ -8,8 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
             time: '7:00 PM',
             description: 'Annual high school basketball championship',
             price: '$15',
-            capacity: '80% Full',
-            location: 'Main Court'
+            capacity: '80% Full'
         },
         {
             id: 2,
@@ -19,8 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
             time: '6:30 PM',
             description: 'Featuring school band and choir performances',
             price: '$10',
-            capacity: '65% Full',
-            location: 'Main Arena'
+            capacity: '65% Full'
         },
         {
             id: 3,
@@ -30,8 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
             time: '3:00 PM',
             description: 'Meet representatives from 50+ colleges',
             price: 'Free',
-            capacity: '45% Full',
-            location: 'Exhibition Hall'
+            capacity: '45% Full'
         },
         {
             id: 4,
@@ -41,8 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
             time: '5:00 PM',
             description: 'Final tournament of the season',
             price: '$12',
-            capacity: '75% Full',
-            location: 'Main Court'
+            capacity: '75% Full'
         },
         {
             id: 5,
@@ -52,8 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
             time: '7:30 PM',
             description: '"The Wizard of Oz" performed by local theater group',
             price: '$20',
-            capacity: '60% Full',
-            location: 'Main Arena'
+            capacity: '60% Full'
         },
         {
             id: 6,
@@ -63,8 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
             time: '9:00 AM',
             description: 'Annual student science project showcase',
             price: '$5',
-            capacity: '40% Full',
-            location: 'Exhibition Hall'
+            capacity: '40% Full'
         },
         {
             id: 7,
@@ -74,8 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
             time: '8:00 PM',
             description: 'Featuring three local rock bands',
             price: '$15',
-            capacity: '70% Full',
-            location: 'Main Arena'
+            capacity: '70% Full'
         },
         {
             id: 8,
@@ -85,8 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
             time: '6:00 PM',
             description: 'Regional wrestling championships',
             price: '$12',
-            capacity: '55% Full',
-            location: 'Main Court'
+            capacity: '55% Full'
         },
         {
             id: 9,
@@ -96,8 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
             time: '4:00 PM',
             description: 'Showcasing local student artwork',
             price: 'Free',
-            capacity: '30% Full',
-            location: 'Exhibition Hall'
+            capacity: '30% Full'
         },
         {
             id: 10,
@@ -107,16 +102,42 @@ document.addEventListener('DOMContentLoaded', function () {
             time: '10:00 AM',
             description: 'Meet local employers and explore opportunities',
             price: 'Free',
-            capacity: '50% Full',
-            location: 'Exhibition Hall'
+            capacity: '50% Full'
         }
     ];
+
+    // Combine predefined events with user-added events
+    const events = [...predefinedEvents, ...userEvents];
+
+    // Function to save user events to localStorage
+    function saveUserEvents() {
+        localStorage.setItem('userEvents', JSON.stringify(userEvents));
+    }
 
     let currentDate = new Date(2024, 11, 5);
     let selectedFilter = 'all';
     let currentView = 'month';
-
     let showingAllEvents = false;
+
+    // Dark Mode Toggle Functionality
+    const darkModeToggle = document.getElementById('darkModeToggle');
+
+    // Check localStorage for theme preference, default to 'light'
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+    });
 
     function calculateEventsPerRow() {
         const containerWidth = document.querySelector('.events-grid').offsetWidth;
@@ -132,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return EVENTS_PER_PAGE;
     }
 
-    // Function to display events
+    // Function to display events (modified to include user-added events)
     function displayEvents(filteredEvents = events) {
         const eventsGrid = document.querySelector('.events-grid');
         eventsGrid.innerHTML = '';
@@ -148,16 +169,15 @@ document.addEventListener('DOMContentLoaded', function () {
             eventCard.className = 'event-card';
             eventCard.innerHTML = `
                 <div class="event-card-content">
-                    <span class="event-category">${event.type}</span>
+                    <span class="event-category">${capitalizeFirstLetter(event.type)}</span>
                     <h3>${event.title}</h3>
                     <div class="event-date">${new Date(event.date).toLocaleDateString('en-US', {
-                weekday: 'long',
-                month: 'long',
-                day: 'numeric'
-            })} at ${event.time}</div>
+                        weekday: 'long',
+                        month: 'long',
+                        day: 'numeric'
+                    })} at ${event.time}</div>
                     <p class="event-description">${event.description}</p>
                     <div class="event-meta">
-                        <span><i class="fas fa-map-marker-alt"></i> ${event.location}</span>
                         <span><i class="fas fa-ticket-alt"></i> ${event.price}</span>
                         <span><i class="fas fa-users"></i> ${event.capacity}</span>
                     </div>
@@ -193,150 +213,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Initial display
-    displayEvents();
-
-    // Update display when window is resized
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            if (!showingAllEvents) {
-                displayEvents();
-            }
-        }, 250);
-    });
-
-    // Update search functionality
-    const searchInput = document.getElementById('eventSearch');
-    searchInput.addEventListener('input', function () {
-        showingAllEvents = false; // Reset to show less when searching
-        const searchTerm = this.value.toLowerCase();
-        const filteredEvents = events.filter(event =>
-            event.title.toLowerCase().includes(searchTerm) ||
-            event.description.toLowerCase().includes(searchTerm)
-        );
-        displayEvents(filteredEvents);
-    });
-
-    // Update filter functionality
-    const filterChips = document.querySelectorAll('.chip');
-    filterChips.forEach(chip => {
-        chip.addEventListener('click', function () {
-            showingAllEvents = false; // Reset to show less when filtering
-            filterChips.forEach(c => c.classList.remove('active'));
-            this.classList.add('active');
-
-            const filterValue = this.dataset.filter;
-            const filteredEvents = filterValue === 'all'
-                ? events
-                : events.filter(event => event.type === filterValue);
-
-            displayEvents(filteredEvents);
-        });
-    });
-
-    // Function to show the overlay with event details
-    function showOverlay(date, dayEvents) {
-        const overlay = document.getElementById('eventOverlay');
-        const overlayDate = document.getElementById('overlayDate');
-        const overlayTitle = document.getElementById('overlayTitle');
-        const overlayDescription = document.getElementById('overlayDescription');
-
-        // Format the selected date
-        const formattedDate = new Date(date).toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-        overlayDate.textContent = formattedDate;
-
-        if (dayEvents.length === 1) {
-            overlayTitle.textContent = dayEvents[0].title;
-            overlayDescription.textContent = dayEvents[0].description;
-        } else if (dayEvents.length > 1) {
-            overlayTitle.textContent = 'Multiple Events';
-            // Combine all event titles and descriptions
-            const combinedDescriptions = dayEvents.map(event => `<strong>${event.title}</strong><p>${event.description}</p>`).join('');
-            overlayDescription.innerHTML = combinedDescriptions;
-        } else {
-            overlayTitle.textContent = 'No Events';
-            overlayDescription.textContent = 'There are no events scheduled for this date.';
-        }
-
-        overlay.style.display = 'flex';
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    // Function to hide the overlay
-    function hideOverlay() {
-        const overlay = document.getElementById('eventOverlay');
-        overlay.style.display = 'none';
-    }
-
-    // Add event listener to the close button
-    document.getElementById('closeOverlay').addEventListener('click', hideOverlay);
-
-    // Modify handleDateSelection to show the overlay
-    function handleDateSelection(date) {
-        const formattedDate = new Date(date).toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-
-        // Filter events for the selected date
-        const dayEvents = events.filter(event => event.date === date);
-        showOverlay(date, dayEvents);
-    }
-
-    // Update calendar day click handlers to include overlay functionality
-    function addCalendarDayClickHandlers() {
-        const calendarDays = document.querySelectorAll('.calendar-day');
-        calendarDays.forEach(day => {
-            day.addEventListener('click', function () {
-                const selectedDate = this.dataset.date;
-                const dayEvents = events.filter(event => event.date === selectedDate);
-                handleDateSelection(selectedDate);
-
-                // Highlight the selected day
-                document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
-                this.classList.add('selected');
-            });
-        });
-    }
-
-    // Update renderCalendar to include the new click handlers
     function renderCalendar() {
-        const calendar = document.getElementById('calendar');
-        calendar.innerHTML = '';
-
-        // Update month/year display with animation
-        const monthYearDisplay = document.getElementById('currentMonthYear');
-        monthYearDisplay.style.opacity = '0';
-        setTimeout(() => {
-            monthYearDisplay.textContent = new Date(currentDate).toLocaleDateString('en-US', {
-                month: 'long',
-                year: 'numeric'
-            });
-            monthYearDisplay.style.opacity = '1';
-        }, 200);
-
         if (currentView === 'month') {
             renderMonthView();
-        } else {
+        } else if (currentView === 'list') {
             renderListView();
         }
-
-        // Add click handlers to calendar days
-        addCalendarDayClickHandlers();
     }
 
     function renderMonthView() {
         const calendar = document.getElementById('calendar');
         if (!calendar) return;
-        
+
         const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
         const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
         const startDate = new Date(firstDay);
@@ -355,12 +247,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Create calendar days
-        const currentDateString = '2024-12-05';
-        
+        const currentDateString = new Date().toISOString().split('T')[0];
+
         for (let date = new Date(startDate); date <= lastDay || date.getDay() !== 0; date.setDate(date.getDate() + 1)) {
             const dateString = date.toISOString().split('T')[0];
             const dayEvents = events.filter(event => event.date === dateString);
-            
+
             const dayElement = document.createElement('div');
             dayElement.className = 'calendar-day';
             if (date.getMonth() !== currentDate.getMonth()) {
@@ -369,9 +261,9 @@ document.addEventListener('DOMContentLoaded', function () {
             if (dateString === currentDateString) {
                 dayElement.classList.add('today');
             }
-            
+
             dayElement.dataset.date = dateString;
-            
+
             // Create the HTML for the day cell
             dayElement.innerHTML = `
                 <span class="date">${date.getDate()}</span>
@@ -385,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 ` : ''}
             `;
-            
+
             calendarGrid.appendChild(dayElement);
         }
 
@@ -398,7 +290,9 @@ document.addEventListener('DOMContentLoaded', function () {
             'sports': '#ff4444',
             'concert': '#44ff44',
             'trade-show': '#4444ff',
-            'community': '#ffaa44'
+            'community': '#ffaa44',
+            'corporate': '#ffaa44', // Added 'corporate' type
+            'other': '#888888' // Added 'other' type
         };
         return colors[type] || '#888888';
     }
@@ -430,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <h4>${event.title}</h4>
                         <div class="event-meta">
                             <span><i class="far fa-clock"></i> ${event.time}</span>
-                            <span><i class="fas fa-map-marker-alt"></i> ${event.location}</span>
+                            <span><i class="fas fa-ticket-alt"></i> ${event.price}</span>
                             <span><i class="fas fa-users"></i> ${event.capacity}</span>
                         </div>
                     </div>
@@ -440,16 +334,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Event Listeners
-    document.querySelectorAll('.chip').forEach(chip => {
-        chip.addEventListener('click', function () {
-            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-            this.classList.add('active');
-            selectedFilter = this.dataset.filter;
-            renderCalendar();
-        });
-    });
-
+    // Event Listeners for View Buttons (Assuming they exist)
     document.querySelectorAll('.view-btn').forEach(btn => {
         btn.addEventListener('click', function () {
             document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
@@ -459,6 +344,68 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Add Event Form Functionality
+    const addEventForm = document.getElementById('add-event-form');
+
+    addEventForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Gather form data
+        const title = document.getElementById('event-title').value.trim();
+        const date = document.getElementById('event-date').value;
+        const time = document.getElementById('event-time').value;
+        const type = document.getElementById('event-type').value;
+        const description = document.getElementById('event-description').value.trim();
+        const price = document.getElementById('event-price').value.trim();
+        const capacity = document.getElementById('event-capacity').value.trim();
+
+        // Validate form data
+        if (!title || !date || !time || !type || !description || !price || !capacity) {
+            alert('Please fill out all required fields.');
+            return;
+        }
+
+        // Create new event object with a unique ID
+        const newEvent = {
+            id: events.length + 1, // Simple ID assignment; consider using UUID for larger applications
+            date,
+            title,
+            type,
+            time,
+            description,
+            price,
+            capacity
+        };
+
+        // Add to userEvents and events arrays
+        userEvents.push(newEvent);
+        events.push(newEvent);
+
+        // Save to localStorage
+        saveUserEvents();
+
+        // Reset the form
+        addEventForm.reset();
+
+        // Re-render events and calendar
+        displayEvents();
+        renderCalendar();
+
+        alert('Event added successfully!');
+    });
+
     // Initialize
+    displayEvents();
     renderCalendar();
+
+    // Update display when window is resized
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (!showingAllEvents) {
+                displayEvents();
+            }
+        }, 250);
+    });
 });

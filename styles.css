@@ -10,6 +10,30 @@
     --bg-secondary: #e5e7eb;
     --card-bg: #ffffff;
     --accent-color-dark: #2a56c6;
+    --background: #ffffff;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+    --primary-color: #1e3a8a;
+    --secondary-color: #3b82f6;
+    --accent-color: #2563eb;
+    --text-dark: #f9fafb;
+    --text-light: #ffffff;
+    --background-light: #111827;
+    --background-gray: #374151;
+    --border-color: #4b5563;
+    --bg-secondary: #1f2937;
+    --card-bg: #1f2937;
+    --accent-color-dark: #1e40af;
+    --background: #111827;
+}
+
+/* Apply Background and Text Colors */
+body {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Reset and base styles */
@@ -27,12 +51,13 @@ body {
 
 /* Header styles */
 header {
-    background-color: #1a5f7a;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--text-light);
     padding: 1rem;
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: background-color 0.3s ease;
 }
 
 header h1 {
@@ -216,18 +241,26 @@ textarea {
 }
 
 button {
-    background-color: #1a5f7a;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--text-light);
     border: none;
     padding: 0.5rem 1rem;
-    margin-top: 1rem;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode button {
+    background-color: var(--accent-color);
+    color: var(--text-light);
 }
 
 button:hover {
-    background-color: #14475a;
+    background-color: var(--accent-color-dark);
+}
+
+body.dark-mode button:hover {
+    background-color: var(--primary-color);
 }
 
 /* Map styles */
@@ -259,14 +292,17 @@ button:hover {
 
 /* Testimonial styles */
 .testimonial {
-    background-color: #f4f4f4;
+    background-color: var(--card-bg);
     padding: 1rem;
     border-radius: 4px;
     margin-top: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .testimonial p {
     font-style: italic;
+    color: var(--text-dark);
+    transition: color 0.3s ease;
 }
 
 .testimonial cite {
@@ -274,15 +310,29 @@ button:hover {
     text-align: right;
     margin-top: 0.5rem;
     font-weight: bold;
+    color: var(--text-dark);
+    transition: color 0.3s ease;
+}
+
+/* Dark Mode Adjustments for Testimonials */
+body.dark-mode .testimonial {
+    background-color: var(--bg-secondary);
+    color: var(--text-light);
+}
+
+body.dark-mode .testimonial p,
+body.dark-mode .testimonial cite {
+    color: var(--text-light);
 }
 
 /* Footer styles */
 footer {
-    background-color: #1a5f7a;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--text-light);
     text-align: center;
     padding: 1rem;
     margin-top: 2rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Responsive design */
@@ -932,7 +982,9 @@ footer {
 }
 
 .overlay-content {
-    background-color: #fff;
+    background-color: var(--background);
+    color: var(--text-dark);
+    transition: background-color 0.3s ease, color 0.3s ease;
     padding: 2rem;
     border-radius: 10px;
     max-width: 500px;
@@ -973,4 +1025,128 @@ footer {
 @keyframes fadeIn {
     from { opacity: 0; transform: scale(0.9); }
     to { opacity: 1; transform: scale(1); }
+}
+
+/* Dark Mode Toggle Button Styles */
+#darkModeToggle {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode #darkModeToggle {
+    color: var(--text-light);
+}
+
+/* Ensure All Elements Adapt to Dark Mode */
+a {
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+body.dark-mode a {
+    color: var(--secondary-color);
+}
+
+/* Additional Styles for Readability */
+.event-card, .overlay-content, footer, header, button, a, .chip, .view-btn, .event-description, .event-meta {
+    /* Ensure text is readable in both modes */
+    color: var(--text-dark);
+}
+
+body.dark-mode .event-card, 
+body.dark-mode .overlay-content, 
+body.dark-mode footer, 
+body.dark-mode header, 
+body.dark-mode button, 
+body.dark-mode a, 
+body.dark-mode .chip, 
+body.dark-mode .view-btn, 
+body.dark-mode .event-description, 
+body.dark-mode .event-meta {
+    color: var(--text-light);
+}
+
+/* Add Your Event Section Styles */
+#add-event {
+    background: var(--background-light);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+#add-event h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+#add-event form {
+    display: flex;
+    flex-direction: column;
+}
+
+#add-event label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+#add-event input,
+#add-event select,
+#add-event textarea {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+#add-event input:focus,
+#add-event select:focus,
+#add-event textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+#add-event button {
+    align-self: center;
+    padding: 0.75rem 2rem;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+#add-event button:hover {
+    background-color: var(--accent-color-dark);
+}
+
+/* Responsive Adjustments for Add Your Event Section */
+@media (max-width: 768px) {
+    #add-event {
+        padding: 1.5rem;
+        margin: 1.5rem auto;
+    }
+
+    #add-event input,
+    #add-event select,
+    #add-event textarea {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+
+    #add-event button {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
 }

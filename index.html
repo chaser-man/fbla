@@ -27,6 +27,10 @@
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#planner">Event Planner</a></li>
             </ul>
+            <!-- Dark Mode Toggle Button -->
+            <button id="darkModeToggle" aria-label="Toggle Dark Mode">
+                🌙
+            </button>
         </nav>
     </header>
 
@@ -85,6 +89,7 @@
                         <span class="chip" data-filter="concert">Concerts</span>
                         <span class="chip" data-filter="trade-show">Trade Shows</span>
                         <span class="chip" data-filter="community">Community</span>
+                        <span class="chip" data-filter="other">Other</span>
                     </div>
                 </div>
 
@@ -94,7 +99,8 @@
                 </div>
             </div>
         </section>
-
+        <br>
+        <br>
         <!-- Calendar Section -->
         <div class="calendar-container">
             <div class="calendar-header">
@@ -102,6 +108,44 @@
             </div>
             <div id="calendar"></div>
         </div>
+        <br>
+        <br>
+        <!-- Add Your Event Section -->
+        <section id="add-event">
+            <h2>Add Your Event</h2>
+            <form id="add-event-form">
+                <label for="event-title">Event Title:</label>
+                <input type="text" id="event-title" name="event-title" required>
+
+                <label for="event-date">Date:</label>
+                <input type="date" id="event-date" name="event-date" required>
+
+                <label for="event-time">Time:</label>
+                <input type="time" id="event-time" name="event-time" required>
+
+                <label for="event-type">Event Type:</label>
+                <select id="event-type" name="event-type" required>
+                    <option value="">Select type</option>
+                    <option value="sports">Sports</option>
+                    <option value="concert">Concert</option>
+                    <option value="trade-show">Trade Show</option>
+                    <option value="community">Community Event</option>
+                    <option value="corporate">Corporate Event</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label for="event-description">Description:</label>
+                <textarea id="event-description" name="event-description" required></textarea>
+
+                <label for="event-price">Price:</label>
+                <input type="text" id="event-price" name="event-price" required>
+
+                <label for="event-capacity">Capacity:</label>
+                <input type="text" id="event-capacity" name="event-capacity" required>
+
+                <button type="submit">Add Event</button>
+            </form>
+        </section>
 
         <!-- Tickets Section -->
         <section id="tickets">
