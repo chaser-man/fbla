@@ -1,10 +1,15 @@
 :root {
-    --primary-color: #2563eb;
+    --primary-color: #4a90e2;
+    --secondary-color: #a0c4ff;
+    --accent-color: #346aeb;
     --text-dark: #1f2937;
     --text-light: #ffffff;
-    --background-light: #ffffff;
+    --background-light: #f9fafb;
     --background-gray: #f3f4f6;
-    --border-color: #e5e7eb;
+    --border-color: #d1d5db;
+    --bg-secondary: #e5e7eb;
+    --card-bg: #ffffff;
+    --accent-color-dark: #2a56c6;
 }
 
 /* Reset and base styles */
@@ -152,12 +157,41 @@ h3 {
 }
 
 .calendar-day {
-    min-height: 80px;
+    background-color: var(--card-bg);
+    padding: 0.5rem;
+    min-height: 100px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .calendar-day.has-event {
     background-color: #c5e1a5;
     cursor: pointer;
+}
+
+.event-names {
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+.event-name {
+    padding: 0.1rem 0.3rem;
+    margin: 0.1rem 0;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.05);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.calendar-day:hover .event-name {
+    white-space: normal;
+    overflow: visible;
+    z-index: 1;
+    position: relative;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Form styles */
@@ -288,7 +322,7 @@ footer {
     padding: 2rem;
     background: var(--background);
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .filter-section {
@@ -399,7 +433,7 @@ footer {
 
 .calendar-day:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .calendar-day.has-event {
@@ -418,9 +452,6 @@ footer {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--primary-color);
-    margin: 2px;
-    display: inline-block;
 }
 
 .event-sidebar {
@@ -490,24 +521,24 @@ footer {
     .event-dashboard {
         grid-template-columns: 1fr;
     }
-    
+
     .modern-calendar {
         gap: 0.5rem;
     }
-    
+
     .calendar-day {
         padding: 0.3rem;
     }
-    
+
     .filter-chips {
         gap: 0.5rem;
     }
-    
+
     .chip {
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
     }
-    
+
     .search-bar input {
         padding: 0.75rem 1.25rem;
         font-size: 1rem;
@@ -630,4 +661,316 @@ footer {
 
 .see-more-btn:hover {
     background: var(--primary-color-dark);
+}
+
+/* Calendar Styles */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: var(--border-color);
+    border: 1px solid var(--border-color);
+}
+
+.calendar-header {
+    background-color: var(--bg-secondary);
+    padding: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.calendar-day {
+    background-color: var(--card-bg);
+    padding: 0.5rem;
+    min-height: 100px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.calendar-day:hover {
+    background-color: var(--bg-secondary);
+}
+
+.calendar-day.other-month {
+    opacity: 0.5;
+}
+
+.calendar-day.today {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.calendar-day.selected {
+    border: 2px solid var(--accent-color);
+}
+
+.date {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.event-indicators {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.event-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+/* Enhanced Calendar Styles */
+
+/* Enhanced Hover Effects */
+.calendar-day {
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.calendar-day:hover {
+    background-color: rgba(74, 144, 226, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Improved Event Indicators */
+.event-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    margin-top: 5px;
+}
+
+.calendar-day.has-event .event-dot {
+    background: var(--secondary-color);
+}
+
+/* Modernized Layout and Design */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    background-color: var(--border-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.calendar-header {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 0.75rem;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.calendar-day {
+    background-color: var(--background-light);
+    padding: 0.75rem;
+    min-height: 100px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Today's Date Highlight */
+.calendar-day.today {
+    border: 2px solid var(--primary-color);
+    background-color: rgba(74, 144, 226, 0.2);
+}
+
+/* Selected Date Styling */
+.calendar-day.selected {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+}
+
+.calendar-day.selected .event-dot {
+    background: var(--text-light);
+}
+
+/* Event Indicators Container */
+.event-indicators {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: auto;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .calendar-day {
+        min-height: 80px;
+        padding: 0.5rem;
+    }
+
+    .calendar-header {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .event-dot {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* Calendar Container */
+.calendar-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Calendar Grid */
+.calendar-grid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: var(--border-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+/* Calendar Header */
+.calendar-header {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 0.6rem;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+}
+
+/* Calendar Day */
+.calendar-day {
+    background-color: var(--background-light);
+    padding: 0.5rem;
+    min-height: 90px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 0.95rem;
+}
+
+/* Today's Date Highlight */
+.calendar-day.today {
+    border: 2px solid var(--primary-color);
+    background-color: rgba(74, 144, 226, 0.2);
+}
+
+/* Selected Date Styling */
+.calendar-day.selected {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+}
+
+/* Event Indicators Container */
+.event-indicators {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    margin-top: auto;
+}
+
+/* Event Dot */
+.event-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    margin-top: 3px;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .calendar-day {
+        min-height: 70px;
+        padding: 0.4rem;
+        font-size: 0.85rem;
+    }
+
+    .calendar-header {
+        padding: 0.4rem;
+        font-size: 0.85rem;
+    }
+
+    .event-dot {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* Overlay Styles */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; /* Ensure it sits above other elements */
+}
+
+.overlay-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.overlay-content h3 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.overlay-content h4 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.overlay-content p {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+/* Close Button Styles */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }

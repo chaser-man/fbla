@@ -48,15 +48,21 @@
             <section id="testimonials">
                 <h2>What People Say</h2>
                 <article class="testimonial">
-                    <p>"We've hosted our Tech Innovation Expo at School Arena for 3 years running. The flexible floor plan accommodates our 200+ vendors perfectly, and the in-house AV team makes setup a breeze. The dedicated event coordinator, Sarah, goes above and beyond every time."</p>
+                    <p>"We've hosted our Tech Innovation Expo at School Arena for 3 years running. The flexible floor
+                        plan accommodates our 200+ vendors perfectly, and the in-house AV team makes setup a breeze. The
+                        dedicated event coordinator, Sarah, goes above and beyond every time."</p>
                     <cite>- Michael Chen, Director of TechNW Exhibitions</cite>
                 </article>
                 <article class="testimonial">
-                    <p>"As a touring sound engineer for 15+ years, I was impressed by the arena's acoustic treatment and modern sound system. We sold out all 5,000 seats for our symphony performance, and the sound quality was exceptional even in the upper sections."</p>
+                    <p>"As a touring sound engineer for 15+ years, I was impressed by the arena's acoustic treatment and
+                        modern sound system. We sold out all 5,000 seats for our symphony performance, and the sound
+                        quality was exceptional even in the upper sections."</p>
                     <cite>- Emma Rodriguez, Technical Director, Pacific Symphony</cite>
                 </article>
                 <article class="testimonial">
-                    <p>"The accessible seating options and friendly staff made our state basketball championships a great experience for all attendees. The new LED scoreboards and instant replay screens added a professional touch our athletes loved."</p>
+                    <p>"The accessible seating options and friendly staff made our state basketball championships a
+                        great experience for all attendees. The new LED scoreboards and instant replay screens added a
+                        professional touch our athletes loved."</p>
                     <cite>- Coach James Wilson, State Athletics Association</cite>
                 </article>
             </section>
@@ -65,7 +71,7 @@
         <!-- Events Section -->
         <section id="events">
             <h2>Upcoming Events</h2>
-            
+
             <!-- Modern Filter Bar -->
             <div class="event-dashboard">
                 <div class="filter-section">
@@ -81,13 +87,21 @@
                         <span class="chip" data-filter="community">Community</span>
                     </div>
                 </div>
-                
+
                 <!-- Events Grid -->
                 <div class="events-grid" id="eventsList">
                     <!-- Event cards will be dynamically populated here -->
                 </div>
             </div>
         </section>
+
+        <!-- Calendar Section -->
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <h3 id="currentMonthYear"></h3>
+            </div>
+            <div id="calendar"></div>
+        </div>
 
         <!-- Tickets Section -->
         <section id="tickets">
@@ -100,46 +114,8 @@
             </ul>
             <p>For group sales or special accommodations, please contact our ticket office at <a
                     href="tel:+15551234567">(555) 123-4567</a>.</p>
-        </section>
 
-        <!-- Information Section -->
-        <section id="info">
-            <h2>Arena Information</h2>
-
-            <!-- Directions -->
-            <section id="directions">
-                <h3>Directions</h3>
-                <p>Our arena is located at 123 Main Street, Anytown, USA. Use the map below for directions:</p>
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d910.5996113645137!2d-113.50861848581441!3d37.06983604137642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sus!4v1733249902145!5m2!1sen!2sus" 
-                    width="100%" 
-                    height="450" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </section>
-
-            <!-- Seating Chart -->
-            <section id="seating-chart">
-                <h3>Seating Chart</h3>
-                <img src="https://picsum.photos/800/600" alt="Arena Seating Chart"
-                    style="max-width: 100%; height: auto;">
-            </section>
-
-            <!-- Policies -->
-            <section id="policies">
-                <h3>Policies</h3>
-                <ul>
-                    <li>No outside food or drinks allowed</li>
-                    <li>No smoking inside the arena</li>
-                    <li>All bags are subject to search</li>
-                    <li>No weapons of any kind are permitted</li>
-                </ul>
-            </section>
-
-            <!-- Amenities -->
+            <!-- Amenities Section -->
             <section id="amenities">
                 <h3>Amenities</h3>
                 <ul>
@@ -223,6 +199,16 @@
                 </form>
             </section>
         </section>
+
+        <!-- Overlay for Enlarged Calendar Day -->
+        <div class="overlay" id="eventOverlay">
+            <div class="overlay-content">
+                <button class="close-btn" id="closeOverlay">&times;</button>
+                <h3 id="overlayDate">Date</h3>
+                <h4 id="overlayTitle">Event Title</h4>
+                <p id="overlayDescription">Event Description</p>
+            </div>
+        </div>
     </main>
 
     <footer>

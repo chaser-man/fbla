@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const events = [
         {
             id: 1,
-            date: '2024-03-15',
+            date: '2024-12-15',
             title: 'Local Basketball Tournament',
             type: 'sports',
             time: '7:00 PM',
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             id: 2,
-            date: '2024-03-18',
+            date: '2024-12-18',
             title: 'Spring Band Concert',
             type: 'concert',
             time: '6:30 PM',
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             id: 3,
-            date: '2024-03-20',
+            date: '2024-12-20',
             title: 'College Fair',
             type: 'trade-show',
             time: '3:00 PM',
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             id: 4,
-            date: '2024-03-22',
+            date: '2024-12-22',
             title: 'Regional Volleyball Championship',
             type: 'sports',
             time: '5:00 PM',
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             id: 5,
-            date: '2024-03-25',
+            date: '2024-12-25',
             title: 'Community Theater Production',
             type: 'community',
             time: '7:30 PM',
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             id: 6,
-            date: '2024-03-28',
+            date: '2024-12-28',
             title: 'Science & Technology Fair',
             type: 'trade-show',
             time: '9:00 AM',
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             id: 7,
-            date: '2024-03-30',
+            date: '2024-12-30',
             title: 'Local Band Night',
             type: 'concert',
             time: '8:00 PM',
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             id: 8,
-            date: '2024-04-02',
+            date: '2025-01-02',
             title: 'Wrestling Tournament',
             type: 'sports',
             time: '6:00 PM',
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             id: 9,
-            date: '2024-04-05',
+            date: '2025-01-05',
             title: 'Spring Art Exhibition',
             type: 'community',
             time: '4:00 PM',
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             id: 10,
-            date: '2024-04-08',
+            date: '2025-01-08',
             title: 'Career Fair',
             type: 'trade-show',
             time: '10:00 AM',
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     ];
 
-    let currentDate = new Date();
+    let currentDate = new Date(2024, 11, 5);
     let selectedFilter = 'all';
     let currentView = 'month';
 
@@ -138,8 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
         eventsGrid.innerHTML = '';
 
         // Calculate how many events to show based on current screen width
-        const eventsToShow = showingAllEvents 
-            ? filteredEvents 
+        const eventsToShow = showingAllEvents
+            ? filteredEvents
             : filteredEvents.slice(0, updateEventsDisplay());
 
         // Display events
@@ -151,10 +151,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="event-category">${event.type}</span>
                     <h3>${event.title}</h3>
                     <div class="event-date">${new Date(event.date).toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        month: 'long',
-                        day: 'numeric'
-                    })} at ${event.time}</div>
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric'
+            })} at ${event.time}</div>
                     <p class="event-description">${event.description}</p>
                     <div class="event-meta">
                         <span><i class="fas fa-map-marker-alt"></i> ${event.location}</span>
@@ -209,10 +209,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update search functionality
     const searchInput = document.getElementById('eventSearch');
-    searchInput.addEventListener('input', function() {
+    searchInput.addEventListener('input', function () {
         showingAllEvents = false; // Reset to show less when searching
         const searchTerm = this.value.toLowerCase();
-        const filteredEvents = events.filter(event => 
+        const filteredEvents = events.filter(event =>
             event.title.toLowerCase().includes(searchTerm) ||
             event.description.toLowerCase().includes(searchTerm)
         );
@@ -222,48 +222,103 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update filter functionality
     const filterChips = document.querySelectorAll('.chip');
     filterChips.forEach(chip => {
-        chip.addEventListener('click', function() {
+        chip.addEventListener('click', function () {
             showingAllEvents = false; // Reset to show less when filtering
             filterChips.forEach(c => c.classList.remove('active'));
             this.classList.add('active');
 
             const filterValue = this.dataset.filter;
-            const filteredEvents = filterValue === 'all' 
-                ? events 
+            const filteredEvents = filterValue === 'all'
+                ? events
                 : events.filter(event => event.type === filterValue);
-            
+
             displayEvents(filteredEvents);
         });
     });
 
-    // Handle date selection
-    function handleDateSelection(date) {
-        const selectedDateDisplay = document.getElementById('selectedDateDisplay');
+    // Function to show the overlay with event details
+    function showOverlay(date, dayEvents) {
+        const overlay = document.getElementById('eventOverlay');
+        const overlayDate = document.getElementById('overlayDate');
+        const overlayTitle = document.getElementById('overlayTitle');
+        const overlayDescription = document.getElementById('overlayDescription');
+
+        // Format the selected date
         const formattedDate = new Date(date).toLocaleDateString('en-US', {
             weekday: 'long',
             year: 'numeric',
             month: 'long',
             day: 'numeric'
         });
-        selectedDateDisplay.textContent = formattedDate;
+        overlayDate.textContent = formattedDate;
 
-        // Filter events for selected date
-        const dayEvents = events.filter(event => event.date === date);
-        displayEvents(dayEvents);
+        if (dayEvents.length === 1) {
+            overlayTitle.textContent = dayEvents[0].title;
+            overlayDescription.textContent = dayEvents[0].description;
+        } else if (dayEvents.length > 1) {
+            overlayTitle.textContent = 'Multiple Events';
+            // Combine all event titles and descriptions
+            const combinedDescriptions = dayEvents.map(event => `<strong>${event.title}</strong><p>${event.description}</p>`).join('');
+            overlayDescription.innerHTML = combinedDescriptions;
+        } else {
+            overlayTitle.textContent = 'No Events';
+            overlayDescription.textContent = 'There are no events scheduled for this date.';
+        }
+
+        overlay.style.display = 'flex';
     }
 
-    // Update calendar day click handlers
+    // Function to hide the overlay
+    function hideOverlay() {
+        const overlay = document.getElementById('eventOverlay');
+        overlay.style.display = 'none';
+    }
+
+    // Add event listener to the close button
+    document.getElementById('closeOverlay').addEventListener('click', hideOverlay);
+
+    // Modify handleDateSelection to show the overlay
+    function handleDateSelection(date) {
+        const formattedDate = new Date(date).toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // Filter events for the selected date
+        const dayEvents = events.filter(event => event.date === date);
+        showOverlay(date, dayEvents);
+    }
+
+    // Update calendar day click handlers to include overlay functionality
+    function addCalendarDayClickHandlers() {
+        const calendarDays = document.querySelectorAll('.calendar-day');
+        calendarDays.forEach(day => {
+            day.addEventListener('click', function () {
+                const selectedDate = this.dataset.date;
+                const dayEvents = events.filter(event => event.date === selectedDate);
+                handleDateSelection(selectedDate);
+
+                // Highlight the selected day
+                document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+    }
+
+    // Update renderCalendar to include the new click handlers
     function renderCalendar() {
         const calendar = document.getElementById('calendar');
         calendar.innerHTML = '';
-        
+
         // Update month/year display with animation
         const monthYearDisplay = document.getElementById('currentMonthYear');
         monthYearDisplay.style.opacity = '0';
         setTimeout(() => {
-            monthYearDisplay.textContent = new Date(currentDate).toLocaleDateString('en-US', { 
-                month: 'long', 
-                year: 'numeric' 
+            monthYearDisplay.textContent = new Date(currentDate).toLocaleDateString('en-US', {
+                month: 'long',
+                year: 'numeric'
             });
             monthYearDisplay.style.opacity = '1';
         }, 200);
@@ -275,40 +330,83 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Add click handlers to calendar days
-        document.querySelectorAll('.calendar-day').forEach(day => {
-            day.addEventListener('click', function() {
-                const selectedDate = this.dataset.date;
-                if (selectedDate) {
-                    handleDateSelection(selectedDate);
-                    // Remove previous selection
-                    document.querySelectorAll('.calendar-day').forEach(d => 
-                        d.classList.remove('selected'));
-                    // Add selected class
-                    this.classList.add('selected');
-                }
-            });
-        });
+        addCalendarDayClickHandlers();
     }
 
     function renderMonthView() {
-        // Similar to before but with enhanced day rendering
-        const dayElement = document.createElement('div');
-        dayElement.className = 'calendar-day';
-        dayElement.innerHTML = `
-            <span class="date">${day}</span>
-            <div class="event-indicators">
-                ${dayEvents.map(event => `
-                    <span class="event-dot" style="background: ${getEventColor(event.type)}" 
-                          title="${event.title}"></span>
-                `).join('')}
-            </div>
-        `;
+        const calendar = document.getElementById('calendar');
+        if (!calendar) return;
+        
+        const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+        const startDate = new Date(firstDay);
+        startDate.setDate(startDate.getDate() - firstDay.getDay());
+
+        const calendarGrid = document.createElement('div');
+        calendarGrid.className = 'calendar-grid';
+
+        // Add day headers
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        daysOfWeek.forEach(day => {
+            const dayHeader = document.createElement('div');
+            dayHeader.className = 'calendar-header';
+            dayHeader.textContent = day;
+            calendarGrid.appendChild(dayHeader);
+        });
+
+        // Create calendar days
+        const currentDateString = '2024-12-05';
+        
+        for (let date = new Date(startDate); date <= lastDay || date.getDay() !== 0; date.setDate(date.getDate() + 1)) {
+            const dateString = date.toISOString().split('T')[0];
+            const dayEvents = events.filter(event => event.date === dateString);
+            
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day';
+            if (date.getMonth() !== currentDate.getMonth()) {
+                dayElement.classList.add('other-month');
+            }
+            if (dateString === currentDateString) {
+                dayElement.classList.add('today');
+            }
+            
+            dayElement.dataset.date = dateString;
+            
+            // Create the HTML for the day cell
+            dayElement.innerHTML = `
+                <span class="date">${date.getDate()}</span>
+                ${dayEvents.length > 0 ? `
+                    <div class="event-names">
+                        ${dayEvents.map(event => `
+                            <div class="event-name" style="color: ${getEventColor(event.type)}">
+                                ${event.title.length > 20 ? event.title.substring(0, 20) + '...' : event.title}
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+            `;
+            
+            calendarGrid.appendChild(dayElement);
+        }
+
+        calendar.innerHTML = '';
+        calendar.appendChild(calendarGrid);
+    }
+
+    function getEventColor(type) {
+        const colors = {
+            'sports': '#ff4444',
+            'concert': '#44ff44',
+            'trade-show': '#4444ff',
+            'community': '#ffaa44'
+        };
+        return colors[type] || '#888888';
     }
 
     function renderListView() {
         const calendar = document.getElementById('calendar');
         calendar.style.display = 'block';
-        
+
         // Group events by date
         const groupedEvents = events.reduce((acc, event) => {
             const date = event.date;
@@ -322,11 +420,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const listItem = document.createElement('div');
             listItem.className = 'date-group';
             listItem.innerHTML = `
-                <h3>${new Date(date).toLocaleDateString('en-US', { 
-                    weekday: 'long', 
-                    month: 'long', 
-                    day: 'numeric' 
-                })}</h3>
+                <h3>${new Date(date).toLocaleDateString('en-US', {
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric'
+            })}</h3>
                 ${dayEvents.map(event => `
                     <div class="event-card">
                         <h4>${event.title}</h4>
@@ -344,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event Listeners
     document.querySelectorAll('.chip').forEach(chip => {
-        chip.addEventListener('click', function() {
+        chip.addEventListener('click', function () {
             document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
             this.classList.add('active');
             selectedFilter = this.dataset.filter;
@@ -353,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.querySelectorAll('.view-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
             currentView = this.dataset.view;
