@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'sports',
             time: '7:00 PM',
             description: 'Annual high school basketball championship',
-            price: '$15',
+            price: 'cost to attend: $15',
             capacity: '80% Full'
         },
         {
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'concert',
             time: '6:30 PM',
             description: 'Featuring school band and choir performances',
-            price: '$10',
+            price: 'cost to attend: $10',
             capacity: '65% Full'
         },
         {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'trade-show',
             time: '3:00 PM',
             description: 'Meet representatives from 50+ colleges',
-            price: 'Free',
+            price: 'cost to attend: Free',
             capacity: '45% Full'
         },
         {
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'sports',
             time: '5:00 PM',
             description: 'Final tournament of the season',
-            price: '$12',
+            price: 'cost to attend: $12',
             capacity: '75% Full'
         },
         {
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'community',
             time: '7:30 PM',
             description: '"The Wizard of Oz" performed by local theater group',
-            price: '$20',
+            price: 'cost to attend: $20',
             capacity: '60% Full'
         },
         {
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'trade-show',
             time: '9:00 AM',
             description: 'Annual student science project showcase',
-            price: '$5',
+            price: 'cost to attend: $5',
             capacity: '40% Full'
         },
         {
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'concert',
             time: '8:00 PM',
             description: 'Featuring three local rock bands',
-            price: '$15',
+            price: 'cost to attend: $15',
             capacity: '70% Full'
         },
         {
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'sports',
             time: '6:00 PM',
             description: 'Regional wrestling championships',
-            price: '$12',
+            price: 'cost to attend: $12',
             capacity: '55% Full'
         },
         {
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'community',
             time: '4:00 PM',
             description: 'Showcasing local student artwork',
-            price: 'Free',
+            price: 'cost to attend: Free',
             capacity: '30% Full'
         },
         {
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'trade-show',
             time: '10:00 AM',
             description: 'Meet local employers and explore opportunities',
-            price: 'Free',
+            price: 'cost to attend: Free',
             capacity: '50% Full'
         }
     ];
@@ -408,4 +408,53 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }, 250);
     });
+
+    // Testimonials Slider Functionality
+    const slidesContainer = document.querySelector('.testimonials-slider .slides');
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    let currentSlide = 0;
+    let testimonialInterval;
+
+    const totalSlides = slides.length;
+
+    function updateSlidePosition() {
+        slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    function nextTestimonial() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlidePosition();
+    }
+
+    function prevTestimonial() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlidePosition();
+    }
+
+    function startTestimonialSlider() {
+        testimonialInterval = setInterval(nextTestimonial, 7500); // Change testimonial every 7.5 seconds
+    }
+
+    function resetTestimonialSlider() {
+        clearInterval(testimonialInterval);
+        startTestimonialSlider();
+    }
+
+    nextBtn.addEventListener('click', () => {
+        nextTestimonial();
+        resetTestimonialSlider();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        prevTestimonial();
+        resetTestimonialSlider();
+    });
+
+    // Initialize Testimonials Slider
+    if (totalSlides > 0) {
+        updateSlidePosition();
+        startTestimonialSlider();
+    }
 });
