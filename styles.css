@@ -2080,3 +2080,128 @@ body.dark-mode .metrics-toggle {
         font-size: 0.7rem;
     }
 }
+
+/* Development Process Section */
+.metrics-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.metrics-section {
+    background: var(--background-light);
+    border-radius: 15px;
+    padding: 2rem;
+}
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.process-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.process-header {
+    background: var(--primary-color);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.process-icon {
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.process-header h3 {
+    color: white;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.process-content {
+    padding: 1.5rem;
+}
+
+.process-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.process-content li {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.process-content li:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.process-content strong {
+    display: block;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.process-content p {
+    color: var(--text-dark);
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Mobile Responsiveness for Process Section */
+@media (max-width: 768px) {
+    .metrics-section {
+        padding: 1.5rem;
+    }
+
+    .process-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .process-header {
+        padding: 1rem;
+    }
+
+    .process-icon {
+        font-size: 1.2rem;
+    }
+
+    .process-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .process-content {
+        padding: 1rem;
+    }
+
+    .process-content strong {
+        font-size: 1rem;
+    }
+
+    .process-content p {
+        font-size: 0.9rem;
+    }
+}
