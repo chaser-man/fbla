@@ -2049,23 +2049,25 @@ button {
 
 /* Subtle Toggle Button */
 .metrics-toggle {
-    background: transparent;
+    background: var(--primary-color);
     border: none;
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 0.75rem;
+    color: var(--text-light);
+    font-size: 0.85rem;
     cursor: pointer;
-    padding: 3px;
-    transition: opacity 0.3s ease;
-    opacity: 0.3;
+    padding: 5px 10px;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+    opacity: 0.8;
+    border-radius: 5px;
 }
 
 .metrics-toggle:hover {
-    opacity: 0.8;
+    opacity: 1;
+    background-color: var(--accent-color-dark);
 }
 
 /* Dark Mode Adjustments */
 body.dark-mode .metrics-toggle {
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--text-light);
 }
 
 @media (max-width: 768px) {
