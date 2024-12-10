@@ -146,11 +146,30 @@ h3 {
     background-color: #f4f4f4;
     padding: 4rem 2rem;
     text-align: center;
-    background-image: url('https://picsum.photos/1600/900');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1531660963020-52ba84d92593?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-size: cover;
     background-position: center;
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+#hero .photo-credit {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    text-shadow: none;
+}
+
+#hero .photo-credit a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#hero .photo-credit a:hover {
+    text-decoration: underline;
 }
 
 #hero h2 {
