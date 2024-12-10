@@ -172,10 +172,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     <span class="event-category">${capitalizeFirstLetter(event.type)}</span>
                     <h3>${event.title}</h3>
                     <div class="event-date">${new Date(event.date).toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        month: 'long',
-                        day: 'numeric'
-                    })} at ${event.time}</div>
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric'
+            })} at ${event.time}</div>
                     <p class="event-description">${event.description}</p>
                     <div class="event-meta">
                         <span><i class="fas fa-ticket-alt"></i> ${event.price}</span>
@@ -373,8 +373,8 @@ document.addEventListener('DOMContentLoaded', function () {
             type,
             time,
             description,
-            price,
-            capacity
+            price: `cost to attend: $${price}`,
+            capacity: `${capacity}% Full`
         };
 
         // Add to userEvents and events arrays

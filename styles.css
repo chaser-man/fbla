@@ -975,10 +975,12 @@ footer {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     justify-content: center;
     align-items: center;
-    z-index: 1001; /* Ensure it sits above other elements */
+    z-index: 1001;
+    /* Ensure it sits above other elements */
 }
 
 .overlay-content {
@@ -1023,8 +1025,15 @@ footer {
 
 /* Fade-in Animation */
 @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* Dark Mode Toggle Button Styles */
@@ -1052,20 +1061,29 @@ body.dark-mode a {
 }
 
 /* Additional Styles for Readability */
-.event-card, .overlay-content, footer, header, button, a, .chip, .view-btn, .event-description, .event-meta {
+.event-card,
+.overlay-content,
+footer,
+header,
+button,
+a,
+.chip,
+.view-btn,
+.event-description,
+.event-meta {
     /* Ensure text is readable in both modes */
     color: var(--text-dark);
 }
 
-body.dark-mode .event-card, 
-body.dark-mode .overlay-content, 
-body.dark-mode footer, 
-body.dark-mode header, 
-body.dark-mode button, 
-body.dark-mode a, 
-body.dark-mode .chip, 
-body.dark-mode .view-btn, 
-body.dark-mode .event-description, 
+body.dark-mode .event-card,
+body.dark-mode .overlay-content,
+body.dark-mode footer,
+body.dark-mode header,
+body.dark-mode button,
+body.dark-mode a,
+body.dark-mode .chip,
+body.dark-mode .view-btn,
+body.dark-mode .event-description,
 body.dark-mode .event-meta {
     color: var(--text-light);
 }
@@ -1226,8 +1244,15 @@ body.dark-mode .event-meta {
 
 /* Fade-in Animation */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsive Adjustments */
