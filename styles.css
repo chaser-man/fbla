@@ -1524,3 +1524,131 @@ button {
 * {
     -webkit-overflow-scrolling: touch;
 }
+
+/* Platforms Section */
+#platforms {
+    padding: 4rem 2rem;
+    background-color: var(--background-light);
+}
+
+#platforms h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+}
+
+.platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.platform-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.platform-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.platform-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.platform-card h3 {
+    padding: 1.5rem 1.5rem 0.5rem;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+}
+
+.platform-card p {
+    padding: 0 1.5rem 1.5rem;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.platform-features {
+    max-width: 800px;
+    margin: 4rem auto 0;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.platform-features h3 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+}
+
+.platform-features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.platform-features li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.platform-features li:last-child {
+    border-bottom: none;
+}
+
+.platform-features li::before {
+    content: "✓";
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+/* Mobile Responsiveness for Platforms Section */
+@media (max-width: 768px) {
+    #platforms {
+        padding: 2rem 1rem;
+    }
+
+    .platform-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .platform-card h3 {
+        font-size: 1.2rem;
+        padding: 1rem 1rem 0.5rem;
+    }
+
+    .platform-card p {
+        padding: 0 1rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .platform-features {
+        margin: 2rem auto 0;
+        padding: 1.5rem;
+    }
+
+    .platform-features h3 {
+        font-size: 1.4rem;
+    }
+
+    .platform-features li {
+        font-size: 1rem;
+        padding: 0.8rem 0;
+    }
+}
