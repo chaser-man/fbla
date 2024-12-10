@@ -482,4 +482,52 @@ document.addEventListener('DOMContentLoaded', function () {
         updateSlidePosition();
         startTestimonialSlider();
     }
+
+    // Filter functionality
+    const filterChips = document.querySelectorAll('.chip');
+    const searchInput = document.getElementById('eventSearch');
+
+    // Add click event listeners to filter chips
+    filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            // Remove active class from all chips
+            filterChips.forEach(c => c.classList.remove('active'));
+            // Add active class to clicked chip
+            chip.classList.add('active');
+            
+            const filterValue = chip.dataset.filter;
+            filterEvents(filterValue, searchInput.value);
+        });
+    });
+
+    // Add search functionality
+    searchInput.addEventListener('input', (e) => {
+        const activeFilter = document.querySelector('.chip.active').dataset.filter;
+        filterEvents(activeFilter, e.target.value);
+    });
+
+    // Function to filter events
+    function filterEvents(filterValue, searchText = '') {
+        let filteredEvents = events;
+        
+        // Filter by type
+        if (filterValue !== 'all') {
+            filteredEvents = events.filter(event => event.type === filterValue);
+        }
+        
+        // Filter by search text
+        if (searchText.trim() !== '') {
+            const searchLower = searchText.toLowerCase();
+            filteredEvents = filteredEvents.filter(event => 
+                event.title.toLowerCase().includes(searchLower) ||
+                event.description.toLowerCase().includes(searchLower)
+            );
+        }
+        
+        // Reset showing all events flag when filtering
+        showingAllEvents = false;
+        
+        // Display filtered events
+        displayEvents(filteredEvents);
+    }
 });
