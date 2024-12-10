@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
         {
             id: 1,
             date: '2024-12-15',
-            title: 'Local Basketball Tournament',
+            title: 'Local Football Tournament',
             type: 'sports',
             time: '7:00 PM',
-            description: 'Annual high school basketball championship',
+            description: 'Annual high school Football championship',
             price: 'cost to attend: $15',
             capacity: '80% Full'
         },
