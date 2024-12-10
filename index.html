@@ -24,7 +24,7 @@
                 <li><a href="#events">Events</a></li>
                 <li><a href="#add-event">Add Event</a></li>
                 <li><a href="#platforms">Access Anywhere</a></li>
-                <li><a href="#research">Research & Standards</a></li>
+                <li><a href="#research">Sources & Standards</a></li>
             </ul>
             <!-- Dark Mode Toggle Button -->
             <button id="darkModeToggle" aria-label="Toggle Dark Mode">
@@ -195,7 +195,7 @@
 
         <!-- Research & Sources Section -->
         <section id="research">
-            <h2>Research & Industry Standards</h2>
+            <h2>Sources & Industry Standards</h2>
             <div class="research-grid">
                 <div class="research-card">
                     <div class="research-header">
@@ -286,11 +286,131 @@
                 </div>
             </div>
         </section>
+
+        <!-- Overlay for Calendar Events -->
+        <div class="overlay" id="eventOverlay">
+            <div class="overlay-content">
+                <span class="close-btn" aria-label="Close">&times;</span>
+                <h2>Event Details</h2>
+                <p>Event Title: <span id="eventTitle"></span></p>
+                <p>Event Date: <span id="eventDate"></span></p>
+                <p>Event Time: <span id="eventTime"></span></p>
+                <p>Event Type: <span id="eventType"></span></p>
+                <p>Event Description: <span id="eventDescription"></span></p>
+                <p>Event Price: <span id="eventPrice"></span></p>
+                <p>Event Capacity: <span id="eventCapacity"></span></p>
+                <p>Event Email: <span id="eventEmail"></span></p>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 School Arena. All rights reserved.</p>
+        <div class="footer-content">
+            <p>&copy; 2024 School Arena. All rights reserved.</p>
+            <button id="metricsToggle" class="metrics-toggle">Website Metrics</button>
+        </div>
     </footer>
+
+    <!-- Hidden Metrics Section -->
+    <section id="metrics" class="metrics-hidden">
+        <div class="metrics-overlay">
+            <div class="metrics-content">
+                <button class="close-metrics-btn" id="closeMetrics">&times;</button>
+                <h2>Performance Metrics & Analytics</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <i class="metric-icon">📊</i>
+                            <h3>User Engagement Metrics</h3>
+                        </div>
+                        <div class="metric-content">
+                            <ul>
+                                <li>
+                                    <strong>Average Session Duration (ASD):</strong>
+                                    <p>Target: >3 minutes per visit, indicating deep user engagement with event content</p>
+                                </li>
+                                <li>
+                                    <strong>Bounce Rate Optimization:</strong>
+                                    <p>Goal: <35% bounce rate through improved user experience and content relevance</p>
+                                </li>
+                                <li>
+                                    <strong>Pages per Session (PPS):</strong>
+                                    <p>Benchmark: Average 4+ pages viewed per user session</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <i class="metric-icon">🎯</i>
+                            <h3>Conversion Analytics</h3>
+                        </div>
+                        <div class="metric-content">
+                            <ul>
+                                <li>
+                                    <strong>Event Submission Rate (ESR):</strong>
+                                    <p>Target: 15% conversion rate from visitors to event submissions</p>
+                                </li>
+                                <li>
+                                    <strong>Click-Through Rate (CTR):</strong>
+                                    <p>Goal: 25% CTR on featured events and promotional content</p>
+                                </li>
+                                <li>
+                                    <strong>Form Completion Rate:</strong>
+                                    <p>Benchmark: 80% completion rate for started event submissions</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <i class="metric-icon">📱</i>
+                            <h3>Platform Performance</h3>
+                        </div>
+                        <div class="metric-content">
+                            <ul>
+                                <li>
+                                    <strong>Core Web Vitals:</strong>
+                                    <p>Largest Contentful Paint (LCP): <2.5s</p>
+                                    <p>First Input Delay (FID): <100ms</p>
+                                    <p>Cumulative Layout Shift (CLS): <0.1</p>
+                                </li>
+                                <li>
+                                    <strong>Cross-Platform Usage:</strong>
+                                    <p>Goal: Balanced distribution across desktop (40%), mobile (45%), tablet (15%)</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <i class="metric-icon">📈</i>
+                            <h3>Growth Indicators</h3>
+                        </div>
+                        <div class="metric-content">
+                            <ul>
+                                <li>
+                                    <strong>Monthly Active Users (MAU):</strong>
+                                    <p>Target: 20% month-over-month growth in unique visitors</p>
+                                </li>
+                                <li>
+                                    <strong>Return Visitor Rate (RVR):</strong>
+                                    <p>Goal: 40% return visitor rate indicating strong user retention</p>
+                                </li>
+                                <li>
+                                    <strong>User Satisfaction Score (CSAT):</strong>
+                                    <p>Benchmark: Maintain 4.5/5 average user satisfaction rating</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>

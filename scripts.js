@@ -530,4 +530,35 @@ document.addEventListener('DOMContentLoaded', function () {
         // Display filtered events
         displayEvents(filteredEvents);
     }
+
+    // Metrics Toggle Functionality
+    const metricsToggle = document.getElementById('metricsToggle');
+    const metricsSection = document.getElementById('metrics');
+    const closeMetrics = document.getElementById('closeMetrics');
+
+    metricsToggle.addEventListener('click', () => {
+        metricsSection.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    });
+
+    closeMetrics.addEventListener('click', () => {
+        metricsSection.classList.remove('show');
+        document.body.style.overflow = '';
+    });
+
+    // Close metrics when clicking outside
+    metricsSection.addEventListener('click', (e) => {
+        if (e.target === metricsSection) {
+            metricsSection.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Close metrics with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && metricsSection.classList.contains('show')) {
+            metricsSection.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    });
 });
