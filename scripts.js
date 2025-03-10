@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const predefinedEvents = [
         {
             id: 1,
-            date: '2024-12-15',
+            date: '2025-03-12',
             title: 'Local Football Tournament',
             type: 'sports',
             time: '7:00 PM',
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: 2,
-            date: '2024-12-18',
+            date: '2025-03-15',
             title: 'Spring Band Concert',
             type: 'concert',
             time: '6:30 PM',
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: 3,
-            date: '2024-12-20',
+            date: '2025-03-18',
             title: 'College Fair',
             type: 'trade-show',
             time: '3:00 PM',
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: 4,
-            date: '2024-12-22',
+            date: '2025-03-21',
             title: 'Regional Volleyball Championship',
             type: 'sports',
             time: '5:00 PM',
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: 5,
-            date: '2024-12-25',
+            date: '2025-03-24',
             title: 'Community Theater Production',
             type: 'community',
             time: '7:30 PM',
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: 6,
-            date: '2024-12-28',
+            date: '2025-03-27',
             title: 'Science & Technology Fair',
             type: 'trade-show',
             time: '9:00 AM',
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: 7,
-            date: '2024-12-30',
+            date: '2025-03-30',
             title: 'Local Band Night',
             type: 'concert',
             time: '8:00 PM',
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: 8,
-            date: '2025-01-02',
+            date: '2025-04-01',
             title: 'Wrestling Tournament',
             type: 'sports',
             time: '6:00 PM',
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: 9,
-            date: '2025-01-05',
+            date: '2025-04-03',
             title: 'Spring Art Exhibition',
             type: 'community',
             time: '4:00 PM',
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: 10,
-            date: '2025-01-08',
+            date: '2025-04-05',
             title: 'Career Fair',
             type: 'trade-show',
             time: '10:00 AM',
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('userEvents', JSON.stringify(userEvents));
     }
 
-    let currentDate = new Date(2024, 11, 5);
+    let currentDate = new Date(2025, 2, 10); // March 10, 2025 (months are 0-indexed in JavaScript)
     let selectedFilter = 'all';
     let currentView = 'month';
     let showingAllEvents = false;
