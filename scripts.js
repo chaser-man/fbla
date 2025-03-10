@@ -535,30 +535,41 @@ document.addEventListener('DOMContentLoaded', function () {
     const metricsToggle = document.getElementById('metricsToggle');
     const metricsSection = document.getElementById('metrics');
     const closeMetrics = document.getElementById('closeMetrics');
+    const metricsToggleLinks = document.querySelectorAll('.metrics-toggle');
 
-    metricsToggle.addEventListener('click', () => {
+    function openMetricsModal() {
         metricsSection.classList.add('show');
         document.body.style.overflow = 'hidden';
-    });
+    }
 
-    closeMetrics.addEventListener('click', () => {
+    function closeMetricsModal() {
         metricsSection.classList.remove('show');
         document.body.style.overflow = '';
+    }
+
+    // Add event listeners to all .metrics-toggle elements
+    metricsToggleLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            openMetricsModal();
+        });
     });
+
+    metricsToggle.addEventListener('click', openMetricsModal);
+
+    closeMetrics.addEventListener('click', closeMetricsModal);
 
     // Close metrics when clicking outside
     metricsSection.addEventListener('click', (e) => {
         if (e.target === metricsSection) {
-            metricsSection.classList.remove('show');
-            document.body.style.overflow = '';
+            closeMetricsModal();
         }
     });
 
     // Close metrics with Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && metricsSection.classList.contains('show')) {
-            metricsSection.classList.remove('show');
-            document.body.style.overflow = '';
+            closeMetricsModal();
         }
     });
 });
