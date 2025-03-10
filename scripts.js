@@ -139,6 +139,56 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('userEvents', JSON.stringify(userEvents));
     }
 
+    // Add function to clear user events
+    function clearUserEvents() {
+        userEvents.length = 0; // Clear the array
+        localStorage.removeItem('userEvents'); // Remove from localStorage
+        events.length = predefinedEvents.length; // Reset events array to only contain predefined events
+        
+        // Re-populate events with just the predefined events
+        for (let i = 0; i < predefinedEvents.length; i++) {
+            events[i] = predefinedEvents[i];
+        }
+        
+        // Re-render events and calendar
+        displayEvents();
+        renderCalendar();
+    }
+
+    // Function to remove a specific event by title
+    function removeEventByTitle(title) {
+        const titleLower = title.toLowerCase();
+        
+        // Find and remove from userEvents array
+        const userEventIndex = userEvents.findIndex(event => 
+            event.title.toLowerCase() === titleLower
+        );
+        
+        if (userEventIndex !== -1) {
+            userEvents.splice(userEventIndex, 1);
+            
+            // Find and remove from combined events array
+            const eventIndex = events.findIndex(event => 
+                event.title.toLowerCase() === titleLower
+            );
+            
+            if (eventIndex !== -1) {
+                events.splice(eventIndex, 1);
+            }
+            
+            // Save updated user events
+            saveUserEvents();
+            
+            // Re-render events and calendar
+            displayEvents();
+            renderCalendar();
+            
+            return true;
+        }
+        
+        return false;
+    }
+
     let currentDate = new Date(2025, 2, 10); // March 10, 2025 (months are 0-indexed in JavaScript)
     let selectedFilter = 'all';
     let currentView = 'month';
