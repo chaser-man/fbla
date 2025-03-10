@@ -139,8 +139,14 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('userEvents', JSON.stringify(userEvents));
     }
 
-    // Add function to clear user events
+    // Function to clear user events - make it globally accessible
     function clearUserEvents() {
+        // This function will be properly defined when the page loads
+        console.log("Page is still loading. Please try again in a moment.");
+    }
+
+    // Redefine the global clearUserEvents function with the proper implementation
+    window.clearUserEvents = function() {
         userEvents.length = 0; // Clear the array
         localStorage.removeItem('userEvents'); // Remove from localStorage
         events.length = predefinedEvents.length; // Reset events array to only contain predefined events
@@ -153,40 +159,41 @@ document.addEventListener('DOMContentLoaded', function () {
         // Re-render events and calendar
         displayEvents();
         renderCalendar();
+        
+        return "All user-added events have been removed.";
+    };
+
+    // Registration system - store registrations in localStorage
+    const registrations = JSON.parse(localStorage.getItem('eventRegistrations')) || [];
+
+    // Function to save registrations to localStorage
+    function saveRegistrations() {
+        localStorage.setItem('eventRegistrations', JSON.stringify(registrations));
     }
 
-    // Function to remove a specific event by title
-    function removeEventByTitle(title) {
-        const titleLower = title.toLowerCase();
+    // Function to register for an event
+    function registerForEvent(registration) {
+        // Generate a unique ID for the registration
+        registration.id = Date.now().toString();
+        registration.timestamp = new Date().toISOString();
         
-        // Find and remove from userEvents array
-        const userEventIndex = userEvents.findIndex(event => 
-            event.title.toLowerCase() === titleLower
-        );
+        // Add to registrations array
+        registrations.push(registration);
         
-        if (userEventIndex !== -1) {
-            userEvents.splice(userEventIndex, 1);
-            
-            // Find and remove from combined events array
-            const eventIndex = events.findIndex(event => 
-                event.title.toLowerCase() === titleLower
-            );
-            
-            if (eventIndex !== -1) {
-                events.splice(eventIndex, 1);
-            }
-            
-            // Save updated user events
-            saveUserEvents();
-            
-            // Re-render events and calendar
-            displayEvents();
-            renderCalendar();
-            
-            return true;
-        }
+        // Save to localStorage
+        saveRegistrations();
         
-        return false;
+        return registration.id;
+    }
+
+    // Function to get registrations for a specific event
+    function getEventRegistrations(eventId) {
+        return registrations.filter(reg => reg.eventId === eventId);
+    }
+
+    // Function to check if a user is already registered for an event
+    function isUserRegistered(email, eventId) {
+        return registrations.some(reg => reg.email === email && reg.eventId === eventId);
     }
 
     let currentDate = new Date(2025, 2, 10); // March 10, 2025 (months are 0-indexed in JavaScript)
@@ -622,4 +629,138 @@ document.addEventListener('DOMContentLoaded', function () {
             closeMetricsModal();
         }
     });
+
+    // Initialize the registration system
+    function initializeRegistrationSystem() {
+        const eventSelect = document.getElementById('registration-event');
+        const selectedEventDetails = document.getElementById('selected-event-details');
+        const registrationForm = document.getElementById('registration-form');
+        const registrationSuccess = document.getElementById('registration-success');
+        
+        // Populate the event dropdown
+        populateEventDropdown();
+        
+        // Event selection change handler
+        eventSelect.addEventListener('change', function() {
+            const selectedEventId = parseInt(this.value);
+            
+            if (selectedEventId) {
+                // Find the selected event
+                const selectedEvent = events.find(event => event.id === selectedEventId);
+                
+                if (selectedEvent) {
+                    // Display event details
+                    document.getElementById('reg-event-title').textContent = selectedEvent.title;
+                    document.getElementById('reg-event-date').textContent = new Date(selectedEvent.date).toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric'
+                    });
+                    document.getElementById('reg-event-time').textContent = selectedEvent.time;
+                    document.getElementById('reg-event-type').textContent = capitalizeFirstLetter(selectedEvent.type);
+                    document.getElementById('reg-event-description').textContent = selectedEvent.description;
+                    document.getElementById('reg-event-price').textContent = selectedEvent.price;
+                    document.getElementById('reg-event-capacity').textContent = selectedEvent.capacity;
+                    
+                    // Show event details and registration form
+                    selectedEventDetails.classList.remove('hidden');
+                    registrationForm.classList.remove('hidden');
+                    registrationSuccess.classList.add('hidden');
+                }
+            } else {
+                // Hide event details and registration form if no event is selected
+                selectedEventDetails.classList.add('hidden');
+                registrationForm.classList.add('hidden');
+            }
+        });
+        
+        // Registration form submission
+        registrationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const selectedEventId = parseInt(eventSelect.value);
+            const selectedEvent = events.find(event => event.id === selectedEventId);
+            
+            // Check if user is already registered
+            const email = document.getElementById('reg-email').value;
+            if (isUserRegistered(email, selectedEventId)) {
+                alert('You are already registered for this event with this email address.');
+                return;
+            }
+            
+            // Create registration object
+            const registration = {
+                eventId: selectedEventId,
+                eventTitle: selectedEvent.title,
+                name: document.getElementById('reg-name').value,
+                email: email,
+                phone: document.getElementById('reg-phone').value,
+                tickets: parseInt(document.getElementById('reg-tickets').value),
+                specialRequests: document.getElementById('reg-requests').value,
+                receiveUpdates: document.getElementById('reg-updates').checked
+            };
+            
+            // Register for the event
+            const registrationId = registerForEvent(registration);
+            
+            // Show success message
+            document.getElementById('success-event-name').textContent = selectedEvent.title;
+            document.getElementById('success-reg-id').textContent = registrationId;
+            
+            // Hide form and show success message
+            registrationForm.classList.add('hidden');
+            registrationSuccess.classList.remove('hidden');
+            
+            // Reset form
+            registrationForm.reset();
+        });
+        
+        // Register another event button
+        document.getElementById('register-another').addEventListener('click', function() {
+            // Reset the form and selection
+            eventSelect.value = '';
+            registrationForm.reset();
+            
+            // Hide success message and event details
+            registrationSuccess.classList.add('hidden');
+            selectedEventDetails.classList.add('hidden');
+            registrationForm.classList.add('hidden');
+        });
+    }
+
+    // Function to populate the event dropdown
+    function populateEventDropdown() {
+        const eventSelect = document.getElementById('registration-event');
+        
+        // Clear existing options except the first one
+        while (eventSelect.options.length > 1) {
+            eventSelect.remove(1);
+        }
+        
+        // Add events to dropdown
+        events.forEach(event => {
+            const option = document.createElement('option');
+            option.value = event.id;
+            option.textContent = `${event.title} - ${new Date(event.date).toLocaleDateString()} at ${event.time}`;
+            eventSelect.appendChild(option);
+        });
+    }
+
+    // Initialize
+    displayEvents();
+    renderCalendar();
+    initializeRegistrationSystem();
+
+    // Update event dropdown when events change
+    function updateEventDropdown() {
+        populateEventDropdown();
+    }
+
+    // Update the displayEvents function to call updateEventDropdown
+    const originalDisplayEvents = displayEvents;
+    displayEvents = function(filteredEvents = events) {
+        originalDisplayEvents(filteredEvents);
+        updateEventDropdown();
+    };
 });

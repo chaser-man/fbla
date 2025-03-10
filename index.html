@@ -21,9 +21,9 @@
             </button>
             <ul class="nav-menu">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#metrics" class="metrics-toggle">Sources & Standards</a></li>
-                <li><a href="#metrics" class="metrics-toggle">Access Anywhere</a></li>
-                <li><a href="#events">Events</a></li>
+                <li><a href="#events">Upcoming Events</a></li>
+                <li><a href="#calendar-container">Calendar</a></li>
+                <li><a href="#register-event">Register</a></li>
                 <li><a href="#add-event">Add Event</a></li>
             </ul>
             <!-- Dark Mode Toggle Button -->
@@ -109,12 +109,87 @@
             <br>
             <br>
             <!-- Calendar Section -->
-            <div class="calendar-container">
+            <div class="calendar-container" id="calendar-container">
                 <div class="calendar-header">
                     <h3 id="currentMonthYear"></h3>
                 </div>
                 <div id="calendar"></div>
             </div>
+            <br>
+            <br>
+            <!-- Event Registration Section -->
+            <section id="register-event">
+                <h2>Register for an Event</h2>
+                <div class="registration-container">
+                    <div class="event-selection">
+                        <label for="registration-event">Select an Event:</label>
+                        <select id="registration-event" required>
+                            <option value="">Choose an event...</option>
+                            <!-- Events will be populated dynamically -->
+                        </select>
+                        
+                        <div id="selected-event-details" class="hidden">
+                            <h3 id="reg-event-title"></h3>
+                            <p>Date: <span id="reg-event-date"></span></p>
+                            <p>Time: <span id="reg-event-time"></span></p>
+                            <p>Type: <span id="reg-event-type"></span></p>
+                            <p>Description: <span id="reg-event-description"></span></p>
+                            <p>Price: <span id="reg-event-price"></span></p>
+                            <p>Capacity: <span id="reg-event-capacity"></span></p>
+                        </div>
+                    </div>
+                    
+                    <form id="registration-form" class="hidden">
+                        <h3>Your Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="reg-name">Full Name:</label>
+                            <input type="text" id="reg-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reg-email">Email Address:</label>
+                            <input type="email" id="reg-email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reg-phone">Phone Number:</label>
+                            <input type="tel" id="reg-phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reg-tickets">Number of Tickets:</label>
+                            <input type="number" id="reg-tickets" min="1" max="10" value="1" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reg-requests">Special Requests or Accommodations:</label>
+                            <textarea id="reg-requests"></textarea>
+                        </div>
+                        
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="reg-updates">
+                            <label for="reg-updates">Receive updates about this event</label>
+                        </div>
+                        
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="reg-terms" required>
+                            <label for="reg-terms">I agree to the terms and conditions</label>
+                        </div>
+                        
+                        <button type="submit" class="register-btn">Complete Registration</button>
+                    </form>
+                    
+                    <div id="registration-success" class="hidden">
+                        <div class="success-message">
+                            <h3>Registration Complete!</h3>
+                            <p>Thank you for registering for <span id="success-event-name"></span>.</p>
+                            <p>Your registration ID: <span id="success-reg-id"></span></p>
+                            <button id="register-another" class="secondary-btn">Register for Another Event</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <br>
             <br>
             <!-- Add Your Event Section -->

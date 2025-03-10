@@ -2229,3 +2229,280 @@ body.dark-mode .metrics-toggle {
         font-size: 0.9rem;
     }
 }
+
+/* Event Registration Section Styles */
+#register-event {
+    background: var(--background-light);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+#register-event h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.registration-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.event-selection {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.event-selection label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.event-selection select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+#selected-event-details {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: var(--background-light);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+#selected-event-details h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+#selected-event-details p {
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+#registration-form {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+#registration-form h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-group.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+}
+
+.form-group.checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    outline: none;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.form-group.checkbox input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-group.checkbox input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-group.checkbox label {
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+/* Focus state for accessibility */
+.form-group.checkbox input[type="checkbox"]:focus {
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+}
+
+/* Hover state */
+.form-group.checkbox input[type="checkbox"]:hover {
+    border-color: var(--primary-color);
+}
+
+.register-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-btn:hover {
+    background-color: var(--accent-color-dark);
+}
+
+.secondary-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--background-gray);
+    color: var(--text-dark);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+}
+
+.secondary-btn:hover {
+    background-color: var(--border-color);
+}
+
+#registration-success {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.success-message {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.success-message h3 {
+    color: #4CAF50;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.success-message p {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.success-message #success-reg-id {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Responsive styles for registration section */
+@media (max-width: 768px) {
+    #register-event {
+        padding: 1.5rem;
+    }
+    
+    .event-selection,
+    #registration-form,
+    #registration-success {
+        padding: 1rem;
+    }
+    
+    #selected-event-details {
+        padding: 1rem;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 16px; /* Prevents zoom on mobile */
+    }
+}
+
+/* Add scroll padding to the root element */
+html {
+    scroll-padding-top: 80px; /* Adjust this value based on your header height */
+    scroll-behavior: smooth;
+}
+
+/* Add some top padding to section targets */
+section[id], 
+div[id="calendar-container"] {
+    padding-top: 20px;
+    margin-top: -20px; /* Offset the padding to maintain visual spacing */
+}
+
+/* Ensure the header doesn't overlap content when scrolling */
+header {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 0.75rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
